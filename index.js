@@ -2,6 +2,7 @@ const express = require("express");
 const db = require("./data/db");
 const cors = require("cors");
 const server = express();
+require('dotenv').config();
 
 const corsOptions = {
   origin: "http://localhost:3000"
@@ -103,7 +104,8 @@ server.delete("/notes/:id", async (req, res) => {
   }
 });
 
-const port = 5000;
-server.listen(port, function() {
-  console.log(`\n=== Web API Listening on http://localhost:${port} ===\n`);
-});
+let port = process.env.PORT;
+ if (port == null || port == "") {
+   port = 8000;
+ }
+ server.listen(port);
